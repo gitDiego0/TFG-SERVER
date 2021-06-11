@@ -10,7 +10,7 @@ app.use(bodyparser.json());
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname,"src/cliente/public"))
+app.use(express.static(path.join(__dirname,"src/cliente/public")))
 
 // app.get("/api/:a", require("./routes/api.js"));
 app.post("/api", require("./routes/api.js"));
