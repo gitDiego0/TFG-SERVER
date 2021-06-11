@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyparser = require("body-parser");
-const port = 3000;
+const port = 5000;
 
 const app = express();
 
@@ -9,6 +9,8 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
 app.use(cors());
+
+app.use(express.static(path.join(__dirname,"src/cliente/public"))
 
 // app.get("/api/:a", require("./routes/api.js"));
 app.post("/api", require("./routes/api.js"));
