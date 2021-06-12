@@ -39,6 +39,25 @@ exports.getRefresco = async (nombre) => {
   return refresco;
 };
 
+exports.addRefresco = async ({ nombre, imagen, precio, cantidad }) => {
+  const add = await refrescos
+    .doc(nombre)
+    .set({
+      nombre: nombre || "",
+      imagen: imagen || "",
+      precio: precio || 0,
+      cantidad: cantidad || 0,
+    })
+    .then(() => {
+      return true;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+
+  return add;
+};
+
 // const updateRefresco = async (data, nombreOld) => {
 //   const { nombre, precio, cantidad } = data;
 

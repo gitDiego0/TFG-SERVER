@@ -48,7 +48,7 @@ router.post("/form-submited/:numeroHabitacion", async (req, res, next) => {
                   to: `${valores.emailInput},reservas.hostalapp@gmail.com`,
                   subject: `${valores.nombre} ${valores.apellidos}: Reserva habitacion ${numeroHabitacion}`,
                   text: `email de prueba de reserva`,
-                  html: `email de pruebna de reserva`,
+                  html: `email de prueba de reserva`,
                 },
                 (err, info) => {
                   if (err)
@@ -108,8 +108,6 @@ router.post("/form-submited/:numeroHabitacion", async (req, res, next) => {
   } catch (e) {
     console.log("error: ", e);
   }
-
-  // ReservarHabitacion(valores, numeroHabitacion);
 });
 
 module.exports = router;

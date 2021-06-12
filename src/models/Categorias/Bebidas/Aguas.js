@@ -18,3 +18,22 @@ exports.getAguas = async () => {
 
   return arrayAguas;
 };
+
+exports.addAgua = async ({ nombre, imagen, precio, cantidad }) => {
+  const add = await aguas
+    .doc(nombre)
+    .set({
+      nombre: nombre || "",
+      imagen: imagen || "",
+      precio: precio || 0,
+      cantidad: cantidad || 0,
+    })
+    .then(() => {
+      return true;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+
+  return add;
+};

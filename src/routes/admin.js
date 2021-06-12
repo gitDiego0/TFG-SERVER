@@ -2,54 +2,52 @@ const { Router } = require("express");
 const db = require("../models/firebase.js");
 
 const { userSign, registro } = require("../models/Admin/Admin.js");
+const { addRefresco } = require("../models/Categorias/Bebidas/Refrescos.js");
+const { addAgua } = require("../models/Categorias/Bebidas/Aguas.js");
+const { addAlcohol } = require("../models/Categorias/Bebidas/Alcohol.js");
+const { addEntrante } = require("../models/Categorias/Entrante/Entrantes.js");
 
 // const changePass = require("../models/Admin/Admin.js");
 
 const router = Router();
 
-router.post("/login", async (req, res) => {
-  console.log(req.body);
-  const {
-    valores: { email },
-  } = req.body;
-  // const usuario = await login(username, password);
-  // if (usuario === true) {
-  //   res.sendStatus(200);
-  // } else {
-  //   res.sendStatus(500);
-  // }
+router.post("/anadirentrante", async (req, res) => {
+  const { valores } = req.body;
 
-  const token = userSign(email).then((string) => {
-    console.log("string: ", string);
-  });
-  console.log("token: ", token);
+  const add = await addEntrante(valores);
 });
-
-router.post("/registro", async (req, res) => {
-  const {
-    valores: { email, password },
-  } = req.body;
-
-  const resultado = await registro(email, password).then((message) => {
-    return message;
-  });
-  console.log("resultado de registro", resultado);
-});
-
-// router.post("/changepass", async (req, res) => {
-//   const { password } = req.body;
-
-//   const resultado = await changePass(password);
-//   if (resultado) {
-//     return res.sendStatus(200);
-//   } else {
-//     return res.sendStatus(500);
-//   }
-// });
 
 router.post("/anadirbebida", async (req, res) => {
-  console.log("valores a añadir: ", req.body);
-  return res.status(200);
+  const { valores } = req.body;
+
+  const { categoria } = valores;
+
+  // const FUNCIONES = {
+  //   Refresco: await addRefresco(valores),
+  //   Agua: await addAgua(valores),
+  //   Alcohol: await addAlcohol(valores),
+  // };
+
+  let add;
+  if (categoria === "Refresco") {
+    add = await addRefresco(valores);
+    console.log(categoria === "Refresco");
+  } else if (categoria === "Agua") {
+    add = await addAgua(valores);
+    console.log(categoria === "Agua");
+  } else if (categoria === "Alcohol") {
+    add = await addAlcohol(valores);
+    console.log(categoria === "Alcohol");
+  }
+
+  // const add = await addRefresco(valores);
+  // console.log("añadir ", add);
+  console.log("add:", add);
+  if (add) {
+    return res.status(200);
+  } else {
+    return res.status(500);
+  }
 });
 
 module.exports = router;

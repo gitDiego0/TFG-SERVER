@@ -5,6 +5,7 @@ const getRefrescos = require("../models/Categorias/Bebidas/Refrescos.js");
 const login = require("../models/Admin/Admin.js");
 const getCategorias = require("../models/Categorias/Categorias.js");
 const { getBebidas } = require("../models/Categorias/Bebidas/Bebidas.js");
+const { getEntrantes } = require("../models/Categorias/Entrante/Entrantes.js");
 
 // router.get("/api/:a", async (req, res) => {
 //   const { a } = req.params;
@@ -31,6 +32,11 @@ router.post("/api", async (req, res) => {
 router.get("/api/categorias", async (req, res) => {
   const categorias = await getCategorias();
   return res.status(200).json(categorias);
+});
+
+router.get("/api/entrantes", async (req, res) => {
+  const entrantes = await getEntrantes();
+  return res.status(200).json(entrantes);
 });
 
 router.get("/api/bebidas", async (req, res) => {
