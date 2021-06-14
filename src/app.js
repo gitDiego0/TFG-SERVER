@@ -15,6 +15,9 @@ app.post("/api", require("./routes/api.js"));
 app.get("/api/categorias", require("./routes/api.js"));
 app.get("/api/bebidas", require("./routes/api.js"));
 app.get("/api/entrantes", require("./routes/api.js"));
+app.get("/api/postres", require("./routes/api.js"));
+app.get("/getreserva/:numeroHabitacion", require("./routes/admin.js"));
+app.post("/delete", require("./routes/admin.js"));
 app.post(
   "/form-submited/:numeroHabitacion",
   require("./routes/form-submited.js")

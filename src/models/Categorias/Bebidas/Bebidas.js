@@ -10,7 +10,6 @@ exports.getBebidas = async () => {
   const refrescos = await getRefrescos();
   const aguas = await getAguas();
   const alcohol = await getAlcohol();
-  console.log("aguas: ", aguas);
   bebidas.push({ refrescos: refrescos });
   bebidas.push({ aguas: aguas });
   bebidas.push({ alcohol: alcohol });

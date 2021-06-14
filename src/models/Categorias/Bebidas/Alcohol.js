@@ -16,8 +16,6 @@ exports.getAlcohol = async () => {
       return;
     });
 
-  console.log("array: ", arrayAlcohol);
-
   return arrayAlcohol;
 };
 

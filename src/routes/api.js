@@ -3,9 +3,10 @@ const router = Router();
 const getFechaEntrada = require("../models/Habitacion/Room.js");
 const getRefrescos = require("../models/Categorias/Bebidas/Refrescos.js");
 const login = require("../models/Admin/Admin.js");
-const getCategorias = require("../models/Categorias/Categorias.js");
+const { getCategorias } = require("../models/Categorias/Categorias.js");
 const { getBebidas } = require("../models/Categorias/Bebidas/Bebidas.js");
 const { getEntrantes } = require("../models/Categorias/Entrante/Entrantes.js");
+const { getPostres } = require("../models/Categorias/Postre/Postres.js");
 
 // router.get("/api/:a", async (req, res) => {
 //   const { a } = req.params;
@@ -31,6 +32,7 @@ router.post("/api", async (req, res) => {
 
 router.get("/api/categorias", async (req, res) => {
   const categorias = await getCategorias();
+  console.log("categorias: ", categorias);
   return res.status(200).json(categorias);
 });
 
@@ -49,6 +51,13 @@ router.get("/api/bebidas", async (req, res) => {
   } else {
     return res.status(500).send({ message: "error" });
   }
+});
+
+router.get("/api/postres", async (req, res) => {
+  const postres = await getPostres().then((obj) => {
+    return obj;
+  });
+  return res.status(200).json(postres);
 });
 
 module.exports = router;

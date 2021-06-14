@@ -6,6 +6,8 @@ const { addRefresco } = require("../models/Categorias/Bebidas/Refrescos.js");
 const { addAgua } = require("../models/Categorias/Bebidas/Aguas.js");
 const { addAlcohol } = require("../models/Categorias/Bebidas/Alcohol.js");
 const { addEntrante } = require("../models/Categorias/Entrante/Entrantes.js");
+const { getReservaHabitacion } = require("../models/Habitacion/Room.js");
+const { deleteItem } = require("../models/Categorias/Categorias.js");
 
 // const changePass = require("../models/Admin/Admin.js");
 
@@ -48,6 +50,21 @@ router.post("/anadirbebida", async (req, res) => {
   } else {
     return res.status(500);
   }
+});
+
+router.get("/getreserva/:numeroHabitacion", async (req, res) => {
+  const { numeroHabitacion } = req.params;
+  const reservas = await getReservaHabitacion(numeroHabitacion).then((obj) => {
+    // console.log(obj);
+    return obj;
+  });
+
+  res.status(200).json({ reservas });
+});
+
+router.post("/delete", async (req, res) => {
+  const { nombre, categoria, subcategoria } = req.body;
+  const resultado = deleteItem(nombre, categoria, subcategoria);
 });
 
 module.exports = router;

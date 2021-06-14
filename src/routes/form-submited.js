@@ -32,6 +32,9 @@ router.post("/form-submited/:numeroHabitacion", async (req, res, next) => {
   // await console.log(checkCliente(valores.identificacion));
 
   try {
+    if (valores.identificacion === undefined || valores.identificacion === "") {
+      return res.status(500).json({ message: "Error" });
+    }
     await checkCliente(valores.identificacion).then(async (resultado) => {
       console.log("el resultado de checkar cliente es: ", resultado);
       if (resultado) {

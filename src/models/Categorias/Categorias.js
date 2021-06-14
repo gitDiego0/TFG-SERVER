@@ -1,5 +1,4 @@
 const db = require("../firebase.js");
-const getBebidas = require("./Bebidas/Bebidas.js");
 
 // const categorias = db.collection("categorias");
 // const bebidas = categorias.doc("Bebida");
@@ -8,12 +7,13 @@ const getBebidas = require("./Bebidas/Bebidas.js");
 // const segundoPlato = categorias.doc("Segundo Plato");
 // const postre = categorias.doc("Postre");
 
-const getCategorias = async () => {
+exports.getCategorias = async () => {
   const categorias = await db
     .collection("categorias")
     .get()
     .then((categoria) => {
       const resultados = [];
+
       categoria.forEach((entrada) => {
         resultados.push(entrada.data());
       });
@@ -22,5 +22,19 @@ const getCategorias = async () => {
 
   return categorias;
 };
-
-module.exports = getCategorias;
+exports.deleteItem = async (nombre, categoria, subCategoria) => {
+  console.log("nombre: ", nombre);
+  const resultado = await db
+    .collection("categorias")
+    .doc(`${categoria}`)
+    .collection(`${subCategoria}`)
+    .doc(`${nombre}`)
+    .delete()
+    .then(() => {
+      return true;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+  return resultado;
+};

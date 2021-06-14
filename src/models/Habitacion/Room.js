@@ -51,6 +51,39 @@ const checkDates = async (numeroHabitacion) => {
   }
 };
 
+exports.getReservaHabitacion = async (numeroHabitacion) => {
+  const resultado = await habitacion
+    .doc(`${numeroHabitacion}`)
+    .collection("reservas")
+    .get()
+    .then((doc) => {
+      const items = [];
+      doc.forEach((entrada) => {
+        let cliente = entrada.data();
+
+        cliente.id_cliente.get().then((res) => {
+          return items.push({
+            fechaReserva: cliente.fechaReserva,
+            fechaEntrada: cliente.fechaEntrada,
+            fechaSalida: cliente.fechaSalida,
+            precio: cliente.precio_total,
+            cliente: res.data(),
+          });
+        });
+      });
+      // console.log(items);
+      return items;
+    })
+    .catch((e) => {
+      console.log("error: ", e);
+      return;
+    });
+
+  // console.log(resultado);
+
+  return resultado;
+};
+
 exports.reservarHabitacion = reservarHabitacion;
 exports.getFechaEntrada = getFechaEntrada;
 exports.checkDates = checkDates;

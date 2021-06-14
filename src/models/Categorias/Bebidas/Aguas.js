@@ -7,7 +7,6 @@ exports.getAguas = async () => {
     .then((doc) => {
       const items = [];
       doc.forEach((entrada) => {
-        console.log("entrada: ", entrada);
         items.push(entrada.data());
       });
       return items;
