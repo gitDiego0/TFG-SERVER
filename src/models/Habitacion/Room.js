@@ -7,7 +7,8 @@ const habitacion = db.collection("habitaciones");
 const reservarHabitacion = async (valores, numeroHabitacion) => {
   console.log("valores: ", valores);
   console.log("numeroHabitacion: ", numeroHabitacion);
-  const { fechaEntrada, fechaSalida, identificacion, precioTotal } = valores;
+  const { fechaEntrada, fechaSalida, identificacion, precioTotal, huespedes } =
+    valores;
 
   console.log("entra en la reserva");
   const resultado = habitacion
@@ -18,6 +19,7 @@ const reservarHabitacion = async (valores, numeroHabitacion) => {
       fechaEntrada: fechaEntrada,
       fechaReserva: new Date(),
       fechaSalida: fechaSalida,
+      huespedes: huespedes,
       id_cliente: db.doc(`clientes/${identificacion}`),
       precio_total: precioTotal,
     })
@@ -61,14 +63,12 @@ exports.getReservaHabitacion = async (numeroHabitacion) => {
       doc.forEach((entrada) => {
         let cliente = entrada.data();
 
-        cliente.id_cliente.get().then((res) => {
-          return items.push({
-            fechaReserva: cliente.fechaReserva,
-            fechaEntrada: cliente.fechaEntrada,
-            fechaSalida: cliente.fechaSalida,
-            precio: cliente.precio_total,
-            cliente: res.data(),
-          });
+        return items.push({
+          fechaReserva: cliente.fechaReserva._seconds,
+          fechaEntrada: cliente.fechaEntrada,
+          fechaSalida: cliente.fechaSalida,
+          huespedes: cliente.huespedes,
+          precio: cliente.precio_total,
         });
       });
       // console.log(items);

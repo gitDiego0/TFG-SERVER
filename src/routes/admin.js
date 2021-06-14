@@ -21,14 +21,9 @@ router.post("/anadirentrante", async (req, res) => {
 
 router.post("/anadirbebida", async (req, res) => {
   const { valores } = req.body;
+  console.log(valores);
 
   const { categoria } = valores;
-
-  // const FUNCIONES = {
-  //   Refresco: await addRefresco(valores),
-  //   Agua: await addAgua(valores),
-  //   Alcohol: await addAlcohol(valores),
-  // };
 
   let add;
   if (categoria === "Refresco") {
@@ -42,8 +37,6 @@ router.post("/anadirbebida", async (req, res) => {
     console.log(categoria === "Alcohol");
   }
 
-  // const add = await addRefresco(valores);
-  // console.log("añadir ", add);
   console.log("add:", add);
   if (add) {
     return res.status(200);
@@ -59,7 +52,7 @@ router.get("/getreserva/:numeroHabitacion", async (req, res) => {
     return obj;
   });
 
-  res.status(200).json({ reservas });
+  res.status(200).json(reservas);
 });
 
 router.post("/delete", async (req, res) => {

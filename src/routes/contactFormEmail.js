@@ -13,19 +13,14 @@ const mailer = nodemailer.createTransport({
 });
 
 router.post("/contact", async (req, res) => {
-  console.log(req.body);
-  const {
-    valores: { nombre, apellidos, emailInput, subject, Mensaje },
-  } = req.body;
-
-  console.log(emailInput);
+  const { valores } = req.body;
 
   mailer.sendMail(
     {
       from: "Hostal App contacto <contact.hostalapp@gmail.com>",
-      to: `${emailInput},contact.hostalapp@gmail.com`,
-      subject: `${nombre} ${apellidos}: ${subject}`,
-      text: `${Mensaje}`,
+      to: `${valores.emailInput},contact.hostalapp@gmail.com`,
+      subject: `${valores.nombre} ${valores.apellidos}: ${valores.subject}`,
+      text: `${valores.Mensaje}`,
       html: `
                   <div>
                     <h1>Gracias por su mensaje ${valores.nombre}</h1>
@@ -34,13 +29,13 @@ router.post("/contact", async (req, res) => {
                   <div>
                     <p>Datos del mensaje:</p>
                     <div>
-                      <p>Nombre: ${nombre}</p>
-                      <p>Apellidos: ${apellidos}</p>                        
-                      <p>Email: ${emailInput}</p>
-                      <p>Asunto: ${subject}</p>
+                      <p>Nombre: ${valores.nombre}</p>
+                      <p>Apellidos: ${valores.apellidos}</p>                        
+                      <p>Email: ${valores.emailInput}</p>
+                      <p>Asunto: ${valores.subject}</p>
                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         <br>
-                        <p>${Mensaje}</p>
+                        <p>${valores.Mensaje}</p>
                         
                     </div>
                   </div>
