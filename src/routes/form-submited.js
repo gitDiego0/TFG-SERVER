@@ -51,7 +51,29 @@ router.post("/form-submited/:numeroHabitacion", async (req, res, next) => {
                   to: `${valores.emailInput},reservas.hostalapp@gmail.com`,
                   subject: `${valores.nombre} ${valores.apellidos}: Reserva habitacion ${numeroHabitacion}`,
                   text: `email de prueba de reserva`,
-                  html: `email de prueba de reserva`,
+                  html: `
+                  <div>
+                    <h1>Gracias por su reserva ${valores.nombre}</h1>
+                  </div>
+                  <div>
+                    <p>Datos de la reserva:</p>
+                    <div>
+                      <ul>
+                        <li>Numero de habitacion: ${valores.numeroHabitacion}</li>
+                        <li>Fecha de entrada: ${valores.fechaEntrada}</li>
+                        <li>Fecha de Salida: ${valores.fechaSalida}</li>
+                        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                        <br>
+                        <li>Nombre: ${valores.nombre}</li>
+                        <li>Apellidos: ${valores.apellidos}</li>
+                        <li>Email: ${valores.emailInput}</li>
+                        <li>DNI/NIE/NIF/Pasaporte: ${valores.identificacion}</li>
+                        <li>Telefono: ${valores.telefono}</li>
+                        <li>Huespedes: ${valores.huespedes}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  `,
                 },
                 (err, info) => {
                   if (err)
@@ -82,7 +104,29 @@ router.post("/form-submited/:numeroHabitacion", async (req, res, next) => {
                         to: `${valores.emailInput},reservas.hostalapp@gmail.com`,
                         subject: `${valores.nombre} ${valores.apellidos}: Reserva habitacion ${numeroHabitacion}`,
                         text: `email de prueba de reserva`,
-                        html: `email de pruebna de reserva`,
+                        html: `
+                  <div>
+                    <h1>Gracias por su reserva ${valores.nombre}</h1>
+                  </div>
+                  <div>
+                    <p>Datos de la reserva:</p>
+                    <div>
+                      <ul>
+                        <li>Numero de habitacion: ${valores.numeroHabitacion}</li>
+                        <li>Fecha de entrada: ${valores.fechaEntrada}</li>
+                        <li>Fecha de Salida: ${valores.fechaSalida}</li>
+                        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                        <br>
+                        <li>Nombre: ${valores.nombre}</li>
+                        <li>Apellidos: ${valores.apellidos}</li>
+                        <li>Email: ${valores.emailInput}</li>
+                        <li>DNI/NIE/NIF/Pasaporte: ${valores.identificacion}</li>
+                        <li>Telefono: ${valores.telefono}</li>
+                        <li>Huespedes: ${valores.huespedes}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  `,
                       },
                       (err, info) => {
                         if (err)
